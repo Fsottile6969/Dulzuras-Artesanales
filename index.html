@@ -608,9 +608,13 @@
 
     function goTo(index) {
       current = (index + total) % total;
-      track.style.transform = `translateX(-${current * 100}%)`;
+      const ancho = carousel.offsetWidth;
+      track.style.transform = `translateX(-${current * ancho}px)`;
       dots.forEach((d, i) => d.classList.toggle('active', i === current));
     }
+
+    // Recalcular al redimensionar la ventana
+    window.addEventListener('resize', () => goTo(current));
 
     carousel.querySelector('.prev').addEventListener('click', () => goTo(current - 1));
     carousel.querySelector('.next').addEventListener('click', () => goTo(current + 1));
